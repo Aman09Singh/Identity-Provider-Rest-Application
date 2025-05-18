@@ -1,0 +1,18 @@
+spring:
+  application:
+    name: RestFul Application
+  datasource:
+    url: ${JDBC_URL}
+    username: ${USER_NAME}
+    password: ${USER_PASSWORD}
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  jpa:
+    hibernate:
+      dll-auto: update
+      show-sql: true
+      dialect: org.hibernate.dialect.MySQL8Dialect
+      naming:
+        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+security:
+  jwt:
+    secret-key : ${SECRET_KEY}
