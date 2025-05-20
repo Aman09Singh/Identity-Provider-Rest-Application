@@ -2,6 +2,7 @@ package com.restful.app.controller;
 
 import com.restful.app.model.UserDTO;
 import com.restful.app.service.implementation.UserInterfaceImpl;
+import io.swagger.v3.oas.annotations.Operation;
 import org.apache.coyote.Response;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -10,6 +11,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
+@RequestMapping("/user")
 public class UserController {
 
     public static final Logger logger = LoggerFactory.getLogger(UserController.class);
@@ -20,7 +22,9 @@ public class UserController {
         this.userInterface = userInterface;
     }
 
-    @DeleteMapping("/user/delete/{email}")
+    @DeleteMapping("/delete/{email}")
+    @Operation(summary = "Deletes user by their email",
+                description = "Returns the proper response to deleting the user")
     public ResponseEntity<String> deleteUser(@PathVariable String email){
         logger.info("Inside delete User method with email id :: {}", email);
         // call service layer
@@ -32,7 +36,9 @@ public class UserController {
         }
     }
 
-    @PostMapping("/user/save")
+    @PostMapping("/save")
+    @Operation(summary = "Saves a user",
+            description = "Saves a user and returns the same user")
     public ResponseEntity<String> saveUser(@RequestBody UserDTO userDTO){
         logger.info("saving user :: {}", userDTO.getUserEmail());
         userInterface.saveUser(userDTO);
